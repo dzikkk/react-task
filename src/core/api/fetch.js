@@ -13,7 +13,6 @@ export const fetch = (function() {
   let clientsTransactions = generateRandomizedClientData();
 
   function getClients() {
-    console.log('TEST');
     return clientsTransactions;
   };
 
