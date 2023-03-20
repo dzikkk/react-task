@@ -18,7 +18,6 @@ export const fetch = (function() {
 
   const FUNCTIONS_BY_URL = {
     '/clients': getClients,
-    '/clients/transactions': '',
   };
 
   return {
