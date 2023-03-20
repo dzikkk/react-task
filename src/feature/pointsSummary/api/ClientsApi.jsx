@@ -10,8 +10,12 @@ function getPointsFromTransaction(value) {
   return Math.max(rounded-50, 0) + Math.max(rounded-100, 0);
 }
 
-function calculatePointsSum(transactionsList) {
-  return transactionsList.reduce((points, transaction) => points += getPointsFromTransaction(transaction), 0);
+function calculateMonthPointsSum(transactionsList) {
+  return transactionsList
+    .reduce((points, transaction) => 
+      points += getPointsFromTransaction(transaction),
+      0,
+    );
 }
 
 function calculatePointsFromTransaction(transactions) {
@@ -19,7 +23,7 @@ function calculatePointsFromTransaction(transactions) {
   const pointsPerMonth = {};
 
   Object.keys(transactions).forEach(date => {
-      const pointsfromMonth = calculatePointsSum(transactions[date]);
+      const pointsfromMonth = calculateMonthPointsSum(transactions[date]);
       pointsSum += pointsfromMonth;
       pointsPerMonth[date] = pointsfromMonth;
   });
