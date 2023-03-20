@@ -10,7 +10,11 @@ function createMonthsSections(pointsPerMonth) {
   return Object
     .keys(pointsPerMonth)
     .map(month => (
-      <PointsPerMonth points={pointsPerMonth[month]} month={month} />
+      <PointsPerMonth
+        key={month}
+        points={pointsPerMonth[month]}
+        month={month}
+      />
     ))
 }
 
