@@ -1,0 +1,32 @@
+.loader-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.circle {
+  transition: transform;
+  animation-name: pulse;
+  animation-duration: .9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+
+  width: 15px;
+  height: 15px;
+  margin: 4px;
+  border-radius: 50%;
+  background-color: rgb(53, 120, 196);
+}
+
+.circle-2 {
+  animation-delay: .3s;
+}
+
+.circle-3 {
+  animation-delay: .6s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.5) }
+}

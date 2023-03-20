@@ -1,0 +1,10 @@
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.grid-item {
+  background-color: #b4bbbe;
+  border: solid 1px #18526b;
+}

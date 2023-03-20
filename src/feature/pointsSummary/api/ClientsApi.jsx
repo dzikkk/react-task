@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetch } from "../../../core/api/fetch";
 import { useErrors } from "../../../core/errorHandling/context/ErrorsRegister";
+import { getClients } from "./api";
 
 const ClientsAPIContext = createContext([]);
 
@@ -26,7 +26,7 @@ function calculatePointsFromTransaction(transactions) {
 
   return {
     pointsPerMonth,
-    points: pointsSum
+    pointsSum,
   }
 }
 
@@ -44,25 +44,32 @@ function appendPointsValues(clients) {
 
 export function ClientsApiProvider({children}) {
   const [clientsTransactions, setClientsTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { addError } = useErrors();
 
   useEffect(() => {
     const fetchClients = async () => {
+      setIsLoading(true);
       try {
-        const clients = await fetch.get('/clients');
+        const clients = await getClients();
 
         setClientsTransactions(appendPointsValues(clients));
       } catch (err) {
         addError(err.message);
       }
-
+      setIsLoading(false);
     };
 
     fetchClients();
   }, [addError]);
 
+  const clientsValue = {
+    clientsTransactions,
+    isLoading,
+  }
+
   return (
-    <ClientsAPIContext.Provider value={clientsTransactions}>
+    <ClientsAPIContext.Provider value={clientsValue}>
       {children}
     </ClientsAPIContext.Provider>
   )
