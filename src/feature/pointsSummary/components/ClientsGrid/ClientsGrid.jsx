@@ -27,7 +27,7 @@ export function ClientsGrid() {
   const generatedGridList = clientsTransactions.map(createGridItem);
 
   return (
-    <div className="grid-wrapper">
+    <div className="grid-wrapper" data-testid="clients-grid">
       {generatedGridList}
     </div>)
 }
