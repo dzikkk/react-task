@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ClientsGrid } from "../ClientsGrid";
 import { useClientsApi } from "../../../api/ClientsApi";
 import { randomIntegerBetween } from "../../../../../core/helpers/randomNumbers";

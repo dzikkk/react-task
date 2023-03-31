@@ -7,7 +7,6 @@ function PointsPerMonth({month, points}) {
 }
 
 function createMonthsSections(pointsPerMonth) {
-
   return Object
     .keys(pointsPerMonth)
     .map(month => (

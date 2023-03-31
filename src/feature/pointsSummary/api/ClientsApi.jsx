@@ -2,7 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useErrors } from "../../../core/errorHandling/context/ErrorsRegister";
 import { getClients } from "./api";
 
-const ClientsAPIContext = createContext([]);
+const ClientsAPIContext = createContext({
+  isLoading: false,
+  clientsTransactions: [],
+});
 
 function getPointsFromTransaction(value) {
   const rounded = Math.floor(value);
@@ -54,18 +57,19 @@ export function ClientsApiProvider({children}) {
   useEffect(() => {
     const fetchClients = async () => {
       setIsLoading(true);
+
       try {
         const clients = await getClients();
-
         setClientsTransactions(appendPointsValues(clients));
       } catch (err) {
         addError(err.message);
       }
+
       setIsLoading(false);
-    };
+    }
 
     fetchClients();
-  }, [addError]);
+  }, []);
 
   const clientsValue = {
     clientsTransactions,

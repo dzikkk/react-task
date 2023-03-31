@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useReducer } from "react";
+import { createContext, useCallback, useContext, useMemo, useReducer } from "react";
 
 const SEVERITY = { critical: 'critical', warning: 'warning' };
 
@@ -46,20 +46,16 @@ const errorsReducer = (state, action) => {
 export function ErrorsRegisterProvider({children}) {
   const [errors, dispatch] = useReducer(errorsReducer, []);
 
-  const actions = useMemo(() => {
-    const addError = (message, severity = SEVERITY.critical) => {
-      dispatch({ type: ERRORS_ACTION.add, message, severity })
-    }
+  const addError = useCallback((message, severity = SEVERITY.critical) => {
+    dispatch({ type: ERRORS_ACTION.add, message, severity })
+  })
 
-    const removeError = (id) => {
-      dispatch({ type: ERRORS_ACTION.remove, id })
-    }
-
-    return { addError, removeError }
-  }, []);
+  const removeError = useCallback((id) => {
+    dispatch({ type: ERRORS_ACTION.remove, id })
+  })
 
   return (
-    <ErrorsRegisterContext.Provider value={{ ...actions, errors }}>
+    <ErrorsRegisterContext.Provider value={{ addError, removeError, errors }}>
       {children}
     </ErrorsRegisterContext.Provider>
   )
